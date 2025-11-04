@@ -2,8 +2,8 @@
 
 {
   home.packages = [
-    inputs.marble-shell.packages.${pkgs.system}.default
-    # inputs.battery-notifier.packages.${pkgs.system}.default
+    inputs.marble-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.battery-notifier.packages.${pkgs.system}.default
     pkgs.astal.mpris
     pkgs.brightnessctl
     pkgs.pulseaudio # pactl
@@ -65,7 +65,7 @@
       };
 
       gestures = {
-        workspace_swipe = true;
+        # workspace_swipe = true;
         workspace_swipe_touch = true;
         workspace_swipe_use_r = true;
       };

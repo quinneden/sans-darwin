@@ -2,9 +2,9 @@
 
 {
   imports = [
-    # inputs.nixos-apple-silicon.nixosModules.default
+    inputs.nixos-apple-silicon.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
-    # ./hardware.nix
+    ./hardware.nix
     # ./audio.nix
     ./gnome.nix
     ./hyprland.nix
@@ -16,7 +16,7 @@
 
   gnome.enable = true;
   hyprland.enable = true;
-  # niri.enable = true;
+  niri.enable = false;
 
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
@@ -26,7 +26,7 @@
     # overlays = [ self.overlays.default ];
   };
 
-  users.users.quinn = {
+  users.users.qeden = {
     isNormalUser = true;
     initialPassword = "cbro";
     extraGroups = [
@@ -37,6 +37,7 @@
       "video"
       "libvirtd"
       "docker"
+      "input"
     ];
   };
 
@@ -45,9 +46,9 @@
     useGlobalPkgs = true;
     useUserPackages = true;
     extraSpecialArgs = { inherit inputs; };
-    users.quinn = {
-      home.username = "quinn";
-      home.homeDirectory = "/home/quinn";
+    users.qeden = {
+      home.username = "qeden";
+      home.homeDirectory = "/home/qeden";
       imports = [ ./home.nix ];
     };
   };

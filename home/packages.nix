@@ -22,7 +22,7 @@ let
     name = "gjs";
     src = null;
     dontUnpack = true;
-    nativeBuildInputs = with pkgs; [ wrapGAppsHook ];
+    nativeBuildInputs = with pkgs; [ wrapGAppsHook3 ];
     buildInputs = with pkgs; [
       gjs
       glib

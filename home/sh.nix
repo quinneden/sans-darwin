@@ -70,7 +70,7 @@ in
 
         fpath+=(
           ${optionalString config.nix.enable config.nix.package + "/share/zsh/site-functions"}
-          /etc/profiles/per-user/quinn/share/zsh/site-functions
+          /etc/profiles/per-user/qeden/share/zsh/site-functions
           ${config.xdg.configHome}/zsh/completions
         )
       '')

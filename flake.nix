@@ -31,12 +31,13 @@
       url = "github:gokcehan/lf";
       flake = false;
     };
-    marble-kit = {
+    marble = {
       url = "git+ssh://git@github.com/marble-shell/kit";
     };
     marble-shell = {
       url = "github:aylur/marble-shell";
       inputs.sshKey.follows = "sshKey";
+      inputs.marble.follows = "marble";
     };
     nix-search = {
       url = "github:aylur/nix-search";
@@ -44,7 +45,7 @@
     };
     nixos-apple-silicon = {
       url = "github:nix-community/nixos-apple-silicon";
-      inputs.nixpkgs.follows = "nixpkgs";
+      # inputs.nixpkgs.follows = "nixpkgs";
     };
     sshKey = {
       url = "git+ssh://git@github.com/quinneden/keys?dir=ssh/qe-mbp/id_ed25519";
@@ -77,7 +78,7 @@
         };
       };
 
-      overlays = import ./pkgs/overlay.nix { inherit inputs; };
+      # overlays = import ./pkgs/overlay.nix { inherit inputs; };
 
       packages.${system} = { inherit (pkgs) marble-shell; };
     };

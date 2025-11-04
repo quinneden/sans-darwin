@@ -12,7 +12,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/interface" = {
-      # show-battery-percentage = true;
+      show-battery-percentage = true;
       font-name = "Ubuntu Nerd Font 11";
       monospace-font-name = "CaskaydiaCove Nerd Font 10";
       cursor-theme = "phinger-cursors-dark";
@@ -93,8 +93,8 @@ with lib.hm.gvariant;
     "org/gnome/settings-daemon/plugins/power" = {
       idle-dim = false;
       power-button-action = "interactive";
-      # sleep-inactive-ac-type = "nothing";
-      # sleep-inactive-battery-type = "nothing";
+      sleep-inactive-ac-type = "nothing";
+      sleep-inactive-battery-type = "nothing";
     };
 
     "org/gnome/shell/app-switcher" = {

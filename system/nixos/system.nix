@@ -7,7 +7,7 @@
     experimental-features = "nix-command flakes";
     auto-optimise-store = true;
     warn-dirty = false;
-    trusted-users = [ "quinn" ];
+    trusted-users = [ "qeden" ];
   };
 
   # virtualisation
@@ -23,9 +23,9 @@
 
   # packages
   environment.systemPackages = with pkgs; [
-    # asahi-bless
-    # asahi-btsync
-    # asahi-fwextract
+    asahi-bless
+    asahi-btsync
+    asahi-fwextract
     home-manager
     neovim
     git
@@ -39,7 +39,9 @@
     xserver = {
       enable = false;
       excludePackages = [ pkgs.xterm ];
+	  libinput.enable = true;
     };
+	libinput.enable = true;
     sysprof.enable = true;
     printing.enable = false;
     flatpak.enable = true;
@@ -52,7 +54,15 @@
   # network
   networking = {
     hostName = "nixos-macmini";
-    networkmanager.enable = true;
+    networkmanager = {
+      enable = true;
+      wifi.backend = "iwd";
+    };
+    wireless.enable = false;
+    wireless.iwd = {
+      enable = true;
+      settings.General.EnableNetworkConfiguration = true;	
+    };
   };
 
   # bluetooth
@@ -69,14 +79,14 @@
   };
 
   # asahi
-  # hardware.asahi = {
-  #   setupAsahiSound = true;
-  #   peripheralFirmwareDirectory = pkgs.fetchzip {
-  #     url = "https://f.qeden.me/fw/asahi-firmware-20250422.tgz";
-  #     hash = "sha256-UfWioh4/GWiXxTLjomrYPYgPYSHKvyVsiZwc1ml8vuM=";
-  #     stripRoot = false;
-  #   };
-  # };
+  hardware.asahi = {
+    setupAsahiSound = true;
+    extractPeripheralFirmware = true;
+    peripheralFirmwareDirectory = pkgs.fetchzip {
+      url = "https://f.qeden.me/fw/asahi-fw-m2-20251102.tgz";
+      hash = "sha256-ZKQeq3tHQob1b0YavuA/Akyjo5ftkXhw1WTwaZSvY7M=";
+    };
+  };
 
   # bootloader
   boot = {
@@ -87,14 +97,8 @@
     loader = {
       timeout = 1;
       systemd-boot.enable = true;
-      # efi.canTouchEfiVariables = false;
-      efi.canTouchEfiVariables = true;
+      efi.canTouchEfiVariables = false;
     };
-
-    # m1n1CustomLogo = pkgs.fetchurl {
-    #   url = "https://f.qeden.me/bootlogo-snowflake-white.png";
-    #   hash = "sha256-6VpPDZSYD57m4LZRPQuOWtR7z70BQ0A2f2jZgjXDiKs=";
-    # };
 
     kernelParams = [
       "quiet"
