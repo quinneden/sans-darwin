@@ -1,9 +1,14 @@
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   home.packages = [
     inputs.marble-shell.packages.${pkgs.stdenv.hostPlatform.system}.default
-    inputs.battery-notifier.packages.${pkgs.system}.default
+    inputs.battery-notifier.packages.${pkgs.stdenv.hostPlatform.system}.default
     pkgs.astal.mpris
     pkgs.brightnessctl
     pkgs.pulseaudio # pactl
@@ -70,10 +75,7 @@
         workspace_swipe_use_r = true;
       };
 
-      windowrulev2 = [
-        "float, class:(.*)"
-        "workspace 7, title:Spotify"
-      ];
+      windowrulev2 = [ "float, class:(.*)" ];
 
       bind =
         let
@@ -85,15 +87,7 @@
           resizeactive = binding "SUPER CTRL" "resizeactive";
           mvactive = binding "SUPER ALT" "moveactive";
           mvtows = binding "SUPER SHIFT" "movetoworkspace";
-          arr = [
-            1
-            2
-            3
-            4
-            5
-            6
-            7
-          ];
+          arr = lib.range 1 7;
           kb_layout_switch =
             pkgs.writers.writeNu "hypr-kb-switch" { }
               # nu
@@ -118,7 +112,7 @@
           "SUPER, Space, exec,  ${kb_layout_switch}"
           "ALT, Tab, exec,      hyprctl dispatch focuscurrentorlast; hyprctl dispatch alterzorder top"
           "CTRL ALT, Delete,    exit"
-          "ALT, Q,              killactive"
+          "SUPER, Q,              killactive"
           "SUPER, F,            togglefloating"
           "SUPER, G,            fullscreen"
           "SUPER, P,            togglesplit"

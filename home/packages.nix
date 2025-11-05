@@ -59,8 +59,8 @@ in
   ++ (mkIf pkgs.stdenv.isLinux (
     with pkgs;
     [
-      inputs.icon-browser.packages.${pkgs.system}.default
-      # inputs.nix-search.packages.${pkgs.system}.default
+      inputs.icon-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+      # inputs.nix-search.packages.${pkgs.stdenv.hostPlatform.system}.default
       screenshot
 
       (mpv.override { scripts = [ mpvScripts.mpris ]; })

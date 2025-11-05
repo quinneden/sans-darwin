@@ -3,12 +3,13 @@
   home = {
     packages = with pkgs; [
       adw-gtk3
-      nerd-fonts.ubuntu
-      qogir-icon-theme
       morewaita-icon-theme
       nerd-fonts.caskaydia-cove
-      yaru-theme
+      nerd-fonts.ubuntu
       papirus-icon-theme
+      phinger-cursors
+      qogir-icon-theme
+      yaru-theme
     ];
   };
 
