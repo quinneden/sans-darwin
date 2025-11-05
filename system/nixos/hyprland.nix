@@ -12,13 +12,12 @@
   config = lib.mkIf config.hyprland.enable {
     programs.hyprland.withUWSM = true;
     programs.hyprland.enable = true;
-    # programs.kdeconnect.enable = true;
-    # services.xserver.displayManager.startx.enable = true;
+    services.xserver.displayManager.startx.enable = true;
 
     services.logind.settings.Login = {
       HandlePowerKey = "ignore";
-      # HandleLidSwitch = "suspend";
-      # HandleLidSwitchExternalPower = "ignore";
+      HandleLidSwitch = "suspend";
+      HandleLidSwitchExternalPower = "ignore";
     };
 
     # xdg.portal = {
@@ -71,7 +70,7 @@
       devmon.enable = true;
       udisks2.enable = true;
       upower.enable = true;
-      # power-profiles-daemon.enable = true;
+      power-profiles-daemon.enable = true;
       accounts-daemon.enable = true;
       gnome = {
         evolution-data-server.enable = true;

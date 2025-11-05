@@ -11,11 +11,14 @@
   };
 
   # virtualisation
-  programs.virt-manager.enable = true;
+  # programs.virt-manager.enable = true;
   virtualisation = {
-    podman.enable = true;
-    docker.enable = true;
-    libvirtd.enable = true;
+    podman = {
+      enable = true;
+      dockerSocket.enable = true;
+    };
+    # docker.enable = true;
+    # libvirtd.enable = true;
   };
 
   # dconf
@@ -23,25 +26,26 @@
 
   # packages
   environment.systemPackages = with pkgs; [
+    asahi-audio
     asahi-bless
     asahi-btsync
     asahi-fwextract
+    asahi-wifisync
+    chromium
+    firefox
+    git
     home-manager
     neovim
-    git
     wget
-    firefox
-    chromium
   ];
 
   # services
   services = {
     xserver = {
-      enable = false;
+      enable = true;
       excludePackages = [ pkgs.xterm ];
-	  libinput.enable = true;
     };
-	libinput.enable = true;
+    libinput.enable = true;
     sysprof.enable = true;
     printing.enable = false;
     flatpak.enable = true;
@@ -61,7 +65,7 @@
     wireless.enable = false;
     wireless.iwd = {
       enable = true;
-      settings.General.EnableNetworkConfiguration = true;	
+      settings.General.EnableNetworkConfiguration = true;
     };
   };
 

@@ -1,11 +1,10 @@
-{ inputs, self, ... }:
+{ inputs, ... }:
 
 {
   imports = [
     inputs.nixos-apple-silicon.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
     ./hardware.nix
-    # ./audio.nix
     ./gnome.nix
     ./hyprland.nix
     ./locale.nix
@@ -35,8 +34,8 @@
       "wheel"
       "audio"
       "video"
-      "libvirtd"
-      "docker"
+      # "libvirtd"
+      # "docker"
       "input"
     ];
   };

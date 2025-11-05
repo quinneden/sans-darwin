@@ -50,11 +50,6 @@
       ];
     };
 
-    # programs.kdeconnect = {
-    #   enable = true;
-    #   # package = pkgs.gnomeExtensions.gsconnect;
-    # };
-
     services = {
       desktopManager.gnome.enable = true;
       displayManager.gdm = {
