@@ -12,18 +12,17 @@
   config = lib.mkIf config.gnome.enable {
     environment = {
       systemPackages = with pkgs; [
+        ghostty
+        gnomeExtensions.color-picker
+        gnomeExtensions.just-perfection
+        gnomeExtensions.user-themes
         morewaita-icon-theme
+        phinger-cursors
         qogir-icon-theme
         wl-clipboard
-        ghostty
-
-        gnomeExtensions.just-perfection
-        gnomeExtensions.color-picker
-        gnomeExtensions.user-themes
       ];
 
       gnome.excludePackages = with pkgs; [
-        # gnome-text-editor
         gnome-console
         gnome-photos
         gnome-tour

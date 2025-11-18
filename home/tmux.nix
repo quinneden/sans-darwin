@@ -171,12 +171,12 @@ in
       vim-tmux-navigator
       yank
     ];
-    prefix = "C-Space";
+    # prefix = "C-Space";
     baseIndex = 1;
     escapeTime = 0;
-    keyMode = "vi";
+    keyMode = "emacs";
     mouse = true;
-    shell = "${pkgs.nushell}/bin/nu";
+    shell = "${pkgs.zsh}/bin/zsh";
     extraConfig =
       # sh
       ''

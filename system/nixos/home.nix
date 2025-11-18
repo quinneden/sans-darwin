@@ -13,7 +13,7 @@
     ../../home/sh.nix
     ../../home/starship.nix
     ../../home/theme.nix
-    ../../home/tmux.nix
+    # ../../home/tmux.nix
   ];
 
   manual.manpages.enable = false;

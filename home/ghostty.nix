@@ -32,17 +32,18 @@ in
   home.packages = mkIf isLinux [
     pkgs.ghostty
     (pkgs.writeShellScriptBin "xterm" ''${pkgs.ghostty}/bin/ghostty "$@"'')
+    pkgs.nerd-fonts.victor-mono
   ];
 
   home.sessionVariables.TERMINAL = "ghostty";
 
   xdg.configFile = {
     "ghostty/config".text = ''
-      command = ${pkgs.tmux}/bin/tmux
-      font-family = CaskaydiaCove Nerd Font
+      command = ${pkgs.zsh}/bin/zsh
+      font-family = VictorMono Nerd Font
       font-feature = liga
       font-feature = calt
-      theme = light:charmful-light,dark:charmful-dark
+      theme = charmful-dark
       window-padding-x = 12
       window-padding-y = 6
       window-decoration = auto
@@ -55,10 +56,10 @@ in
       confirm-close-surface = false
 
       # using tmux instead
-      keybind = alt+one=unbind
-      keybind = alt+two=unbind
-      keybind = alt+three=unbind
-      keybind = alt+four=unbind
+      # keybind = alt+one=unbind
+      # keybind = alt+two=unbind
+      # keybind = alt+three=unbind
+      # keybind = alt+four=unbind
 
       keybind = ctrl+shift+minus=decrease_font_size:1
       keybind = ctrl+shift+minus=decrease_font_size:1

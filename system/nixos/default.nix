@@ -27,15 +27,12 @@
 
   users.users.qeden = {
     isNormalUser = true;
-    initialPassword = "cbro";
     extraGroups = [
       "nixosvmtest"
       "networkmanager"
       "wheel"
       "audio"
       "video"
-      # "libvirtd"
-      # "docker"
       "input"
     ];
   };
