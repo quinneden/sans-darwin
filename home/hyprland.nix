@@ -35,7 +35,7 @@
         "marble"
       ];
 
-      monitor = [ ",preferred,auto,1" ];
+      monitor = [ ",preferred,auto,2" ];
 
       general = {
         layout = "dwindle";
@@ -56,7 +56,7 @@
           disable_while_typing = true;
           drag_lock = true;
         };
-        sensitivity = 0;
+        sensitivity = 0.1;
         float_switch_override_focus = 2;
       };
 
@@ -88,14 +88,6 @@
           mvactive = binding "SUPER ALT" "moveactive";
           mvtows = binding "SUPER SHIFT" "movetoworkspace";
           arr = lib.range 1 7;
-          kb_layout_switch =
-            pkgs.writers.writeNu "hypr-kb-switch" { }
-              # nu
-              ''
-                hyprctl devices -j | from json | get keyboards | each {|kyb|
-                  hyprctl switchxkblayout $in.name next
-                }
-              '';
         in
         [
           "SUPER, R, exec,              marble launcher"
@@ -106,10 +98,10 @@
           ",Print, exec,                screenshot"
           "SHIFT, Print, exec,          screenshot --full"
           "SUPER, Return, exec,         xterm" # xterm is a symlink, not actually xterm
-          "SUPER, W, exec,              firefox"
+          "SUPER, B, exec,              firefox"
           "SUPER, E, exec,              xterm -e lf"
 
-          "SUPER, Space, exec,  ${kb_layout_switch}"
+          # "SUPER, Space, exec,  ${kb_layout_switch}"
           "ALT, Tab, exec,      hyprctl dispatch focuscurrentorlast; hyprctl dispatch alterzorder top"
           "CTRL ALT, Delete,    exit"
           "SUPER, Q,              killactive"

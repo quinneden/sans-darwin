@@ -14,6 +14,7 @@
     ../../home/starship.nix
     ../../home/theme.nix
     # ../../home/tmux.nix
+    ../../home/zed
   ];
 
   manual.manpages.enable = false;

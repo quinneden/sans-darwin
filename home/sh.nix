@@ -80,6 +80,15 @@ in
             ${config.xdg.configHome}/zsh/completions
             ${config.xdg.configHome}/zsh/functions
           )
+
+          ZFUNCTION_DIGEST=$ZDOTDIR/functions/zfunctions.zwc
+
+          if [[ ! -f $ZFUNCTION_DIGEST ]] \
+          || [[ $ZFUNCTION_DIGEST -ot $ZDOTDIR/functions(#qN.om[1]) ]]; then
+            zcompile $ZFUNCTION_DIGEST $ZDOTDIR/functions/*(N.)
+          fi
+
+          autoload -Uz $ZDOTDIR/functions/*(N.:t)
         '')
 
         (mkOrder 1000 ''
@@ -91,9 +100,6 @@ in
 
         (mkOrder 1500 ''
           (
-            # Function to determine the need of a zcompile. If the .zwc file
-            # does not exist, or the base file is newer, we need to compile.
-            # These jobs are asynchronous, and will not impact the interactive shell
             zcompare() {
               if [[ -s $1 && ( ! -s $1.zwc || $1 -nt $1.zwc) ]]; then
                 zcompile $1
@@ -102,25 +108,20 @@ in
 
             setopt EXTENDED_GLOB
 
-            # zcompile the completion cache; siginificant speedup.
-            for file in $ZDOTDIR/.zcomp^(*.zwc)(.); do
-              zcompare $file
-            done
-
-            # zcompile .zshrc
             zcompare $ZDOTDIR/.zshrc
 
-            # zcompile all .zsh files in the custom module
-            for file in $ZDOTDIR/functions/^(*.zwc)(.); do
+            for file in $ZDOTDIR/.zcomp^(*.zwc)(N.); do
               zcompare $file
             done
 
-            for file in $ZDOTDIR/drop-ins/^(*.zwc)(.); do
-              zcompare $file
-            done
+            if [[ $ZDOTDIR/functions.zwc -ot $ZDOTDIR/functions(#qN.om[1]) ]]; then
+              zcompile $ZDOTDIR/functions/functions.zwc $ZDOTDIR/functions/^(*.zwc)(N.)
+            fi
           ) &!
 
-          autoload -wUz ~/.config/zsh/functions/*.zwc(N.:r)
+          for file in $ZDOTDIR/drop-ins/*(N.); do
+            source $file
+          done
         '')
       ];
   };

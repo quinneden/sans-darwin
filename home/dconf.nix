@@ -30,7 +30,7 @@ with lib.hm.gvariant;
     };
 
     "org/gnome/desktop/wm/keybindings" = {
-      close = [ "<Alt>q" ];
+      close = [ "<Super>q" ];
       minimize = [ ]; # <Super>H
       move-to-workspace-1 = [ "<Shift><Super>1" ];
       move-to-workspace-2 = [ "<Shift><Super>2" ];
@@ -108,10 +108,6 @@ with lib.hm.gvariant;
     "org/virt-manager/virt-manager/connections" = {
       autoconnect = [ "qemu:///system" ];
       uris = [ "qemu:///system" ];
-    };
-
-    "org/gnome/TextEditor" = {
-      keybindings = "vim";
     };
   };
 }

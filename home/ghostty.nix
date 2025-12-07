@@ -29,7 +29,7 @@ let
   '';
 in
 {
-  home.packages = mkIf isLinux [
+  home.packages = [
     pkgs.ghostty
     (pkgs.writeShellScriptBin "xterm" ''${pkgs.ghostty}/bin/ghostty "$@"'')
     pkgs.nerd-fonts.victor-mono
