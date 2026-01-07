@@ -84,10 +84,7 @@
   hardware.asahi = {
     setupAsahiSound = true;
     extractPeripheralFirmware = true;
-    peripheralFirmwareDirectory = pkgs.fetchzip {
-      url = "https://f.qeden.me/fw/asahi-fw-m2-20251102.tgz";
-      hash = "sha256-ZKQeq3tHQob1b0YavuA/Akyjo5ftkXhw1WTwaZSvY7M=";
-    };
+    peripheralFirmwareDirectory = "/etc/nixos/firmware";
   };
 
   # bootloader
@@ -108,6 +105,16 @@
       "rd.udev.log_level=3"
       "splash"
       "udev.log_priority=3"
+    ];
+
+    kernelPatches = [
+      {
+        name = "macsmc-power.c support_charge_behavior";
+        patch = pkgs.fetchpatch2 {
+          url = "https://patch-diff.githubusercontent.com/raw/AsahiLinux/linux/pull/435.patch";
+          sha256 = "sha256-j3T1uaL4kEmmea9w+PKVp2kpjcPXAc1gy9LrEbCPhLU=";
+        };
+      }
     ];
   };
 
