@@ -4,7 +4,7 @@
 
     settings = {
       color.ui = true;
-      core.editor = "nvim";
+      core.editor = "micro";
       credential.helper = "store";
       github.user = "quinneden";
       push.autoSetupRemote = true;

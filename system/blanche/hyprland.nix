@@ -12,7 +12,7 @@
   config = lib.mkIf config.hyprland.enable {
     programs.hyprland.withUWSM = true;
     programs.hyprland.enable = true;
-    services.xserver.displayManager.startx.enable = true;
+    # services.xserver.displayManager.startx.enable = true;
 
     services.logind.settings.Login = {
       HandlePowerKey = "ignore";

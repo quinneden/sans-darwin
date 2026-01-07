@@ -1,8 +1,5 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 let
-  inherit (lib.modules) mkIf;
-  inherit (pkgs.stdenv) isLinux;
-
   colors = scheme: ''
     background = ${scheme.bg}
     foreground = ${scheme.fg}

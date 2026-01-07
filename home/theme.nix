@@ -4,7 +4,7 @@
     packages = with pkgs; [
       adw-gtk3
       morewaita-icon-theme
-      nerd-fonts.caskaydia-cove
+      nerd-fonts.victor-mono
       nerd-fonts.ubuntu
       papirus-icon-theme
       phinger-cursors

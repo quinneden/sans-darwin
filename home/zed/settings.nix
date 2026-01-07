@@ -1,13 +1,19 @@
+{ inputs, self, ... }:
+
 {
   active_pane_modifiers = { };
   agent = {
     always_allow_tool_actions = true;
     commit_message_model = {
-      model = "claude-sonnet-4-thinking";
+      model = "claude-sonnet-4.5-thinking";
       provider = "zed.dev";
     };
     default_model = {
-      model = "claude-sonnet-4-thinking";
+      model = "claude-sonnet-4.5-thinking";
+      provider = "zed.dev";
+    };
+    thread_summary_model = {
+      model = "claude-haiku-4.5";
       provider = "zed.dev";
     };
     default_profile = "write";
@@ -20,138 +26,26 @@
     play_sound_when_agent_done = true;
     profiles = {
       ask = {
-        context_servers = {
-          mcp-nixos = {
-            tools = {
-              darwin_info = true;
-              darwin_list_options = true;
-              darwin_options_by_prefix = true;
-              darwin_search = true;
-              darwin_stats = true;
-              home_manager_info = true;
-              home_manager_list_options = true;
-              home_manager_options_by_prefix = true;
-              home_manager_search = true;
-              home_manager_stats = true;
-              nixhub_find_version = true;
-              nixhub_package_versions = true;
-              nixos_channels = true;
-              nixos_flakes_search = true;
-              nixos_flakes_stats = true;
-              nixos_info = true;
-              nixos_search = true;
-              nixos_stats = true;
-            };
-          };
-          mcp-server-context7 = {
-            tools = {
-              get-library-docs = true;
-              resolve-library-id = true;
-            };
-          };
-          mcp-server-github = {
-            tools = {
-              add_comment_to_pending_review = false;
-              add_issue_comment = false;
-              add_pull_request_review_comment_to_pending_review = false;
-              get_code_scanning_alert = false;
-              get_commit = true;
-              get_file_contents = true;
-              get_issue = true;
-              get_issue_comments = true;
-              get_job_logs = true;
-              get_latest_release = true;
-              get_me = true;
-              get_notification_details = true;
-              get_pull_request = true;
-              get_pull_request_comments = true;
-              get_pull_request_diff = true;
-              get_pull_request_files = true;
-              get_pull_request_reviews = true;
-              get_pull_request_status = true;
-              get_release_by_tag = true;
-              get_secret_scanning_alert = false;
-              get_tag = true;
-              list_branches = true;
-              list_code_scanning_alerts = false;
-              list_commits = true;
-              list_gists = true;
-              list_issues = true;
-              list_notifications = true;
-              list_pull_requests = true;
-              list_releases = true;
-              list_secret_scanning_alerts = false;
-              list_tags = true;
-              search_code = true;
-              search_issues = true;
-              search_orgs = true;
-              search_pull_requests = true;
-              search_repositories = true;
-              search_users = true;
-            };
-          };
-          mcp-server-gitlab = {
-            tools = {
-              create_branch = false;
-              create_issue = false;
-              create_merge_request = false;
-              create_or_update_file = false;
-              create_repository = false;
-              fork_repository = false;
-              get_file_contents = true;
-              push_files = false;
-              search_repositories = true;
-            };
-          };
-          serena-context-server = {
-            tools = {
-              initial_instructions = true;
-              insert_after_symbol = false;
-              insert_at_line = false;
-              insert_before_symbol = false;
-              jet_brains_find_referencing_symbols = false;
-              list_dir = true;
-              list_memories = true;
-              onboarding = true;
-              read_memory = true;
-              remove_project = false;
-              rename_symbol = false;
-              replace_lines = false;
-              replace_symbol_body = false;
-              restart_language_server = true;
-              search_for_pattern = true;
-              summarize_changes = true;
-              switch_modes = true;
-              think_about_collected_information = true;
-              think_about_task_adherence = true;
-              think_about_whether_you_are_done = true;
-              write_memory = true;
-            };
-          };
-        };
-        enable_all_context_servers = false;
+        enable_all_context_servers = true;
         name = "Ask";
         tools = {
-          contents = true;
+          copy_path = true;
+          create_directory = true;
+          delete_path = true;
           diagnostics = true;
+          edit_file = true;
           fetch = true;
           find_path = true;
           grep = true;
           list_directory = true;
+          move_path = true;
           now = true;
           open = true;
           project_notifications = true;
           read_file = true;
-          terminal = false;
+          terminal = true;
           thinking = true;
           web_search = true;
-        };
-      };
-      minimal = {
-        enable_all_context_servers = false;
-        name = "Minimal";
-        tools = {
-          thinking = true;
         };
       };
       write = {
@@ -178,34 +72,9 @@
         };
       };
     };
-    thread_summary_model = {
-      model = "claude-sonnet-4";
-      provider = "zed.dev";
-    };
     use_modifier_to_send = true;
   };
   agent_ui_font_size = 14;
-  auto_install_extensions = {
-    basher = true;
-    dockerfile = true;
-    env = true;
-    git-firefly = true;
-    github-theme = true;
-    html = true;
-    ini = true;
-    just = true;
-    log = true;
-    make = true;
-    mcp-server-context7 = true;
-    mcp-server-github = true;
-    nix = true;
-    starlark = true;
-    symbols = true;
-    tombi = true;
-    toml = true;
-    xml = true;
-  };
-  auto_update = true;
   autosave = "on_window_change";
   base_keymap = "VSCode";
   bottom_dock_layout = "full";
@@ -225,21 +94,24 @@
   confirm_quit = true;
   context_servers = {
     mcp-nixos = {
-      args = [ "mcp-nixos" ];
       command = "uvx";
+      args = [ "mcp-nixos" ];
     };
     mcp-server-context7 = {
-      enabled = true;
+      enabled = false;
       settings = {
         context7_api_key = "";
       };
     };
     mcp-server-github = {
+      enabled = false;
       settings = {
         github_personal_access_token = "";
       };
     };
     serena-context-server = {
+      enabled = false;
+      command = "uvx";
       args = [
         "--from"
         "git+https://github.com/oraios/serena"
@@ -250,8 +122,6 @@
         "--project"
         "."
       ];
-      command = "uvx";
-      enabled = true;
     };
   };
   current_line_highlight = "all";
@@ -317,13 +187,6 @@
   jupyter = {
     enabled = false;
   };
-  language_models = {
-    bedrock = {
-      authentication_method = "named_profile";
-      profile = "BedrockAccess";
-      region = "us-west-2";
-    };
-  };
   languages = {
     C = {
       enable_language_server = false;
@@ -344,7 +207,6 @@
           command = "gofmt";
         };
       };
-      language_servers = [ "delv" ];
     };
     HTML = {
       language_servers = [
@@ -359,11 +221,11 @@
       formatter = [
         {
           external = {
+            command = "just";
             arguments = [
               "--dump"
               "--justfile=/dev/stdin"
             ];
-            command = "just";
           };
         }
       ];
@@ -381,8 +243,8 @@
       formatter = [
         {
           external = {
-            arguments = [ "--strict" ];
             command = "nixfmt";
+            arguments = [ "--strict" ];
           };
         }
       ];
@@ -402,12 +264,10 @@
       language_servers = [
         "basedpyright"
         "ruff"
-        "ty"
       ];
       tab_size = 4;
     };
     Rust = {
-      show_edit_predictions = false;
       tab_size = 4;
     };
     "Shell Script" = {
@@ -416,16 +276,6 @@
           command = "shfmt";
         };
       };
-    };
-    Starlark = {
-      formatter = {
-        external = {
-          arguments = [ "{buffer_path}" ];
-          command = "/Users/William.Edenfield/.local/bin/buildifier-wrapper.sh";
-        };
-      };
-      language_servers = [ "starpls" ];
-      tab_size = 4;
     };
     TOML = {
       formatter = [
@@ -456,7 +306,7 @@
     nil = {
       settings = {
         nix = {
-          binary = "/nix/var/nix/profiles/default/bin/nix";
+          # binary = "/nix/var/nix/profiles/default/bin/nix";
           flake = {
             autoArchive = true;
             autoEvalInputs = false;
@@ -469,14 +319,14 @@
       settings = {
         initialization_options = {
           nixpkgs = {
-            expr = "import <nixpkgs> {}";
+            expr = "import ${inputs.nixpkgs} { }";
           };
           options = {
-            darwin = {
-              expr = "(builtins.getFlake (builtins.toString ~/.dotfiles)).darwinConfigurations.qe-mbp.options";
+            nixos = {
+              expr = "(builtins.getFlake (builtins.toString ${self})).nixosConfigurations.options";
             };
             home-manager = {
-              expr = "(builtins.getFlake (builtins.toString ~/.dotfiles)).darwinConfigurations.m4.options.home-manager.users.type.getSubOptions []";
+              expr = "(builtins.getFlake (builtins.toString ${self})).nixosConfigurations.blanche.options.home-manager.users.type.getSubOptions []";
             };
           };
         };
@@ -544,8 +394,8 @@
     default_width = 640;
     dock = "bottom";
     env = {
-      EDITOR = "zed --wait";
-      GIT_EDITOR = "zed --wait";
+      EDITOR = "zed-editor --wait";
+      GIT_EDITOR = "zed-editor --wait";
     };
     font_family = "VictorMono Nerd Font Mono";
     font_size = 14;

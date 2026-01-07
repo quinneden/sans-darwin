@@ -4,21 +4,23 @@
   documentation.nixos.enable = false;
 
   nix.settings = {
-    experimental-features = "nix-command flakes";
+    accept-flake-config = true;
+    always-allow-substitutes = true;
+    extra-experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
     auto-optimise-store = true;
     warn-dirty = false;
     trusted-users = [ "qeden" ];
   };
 
   # virtualisation
-  # programs.virt-manager.enable = true;
   virtualisation = {
     podman = {
       enable = true;
       dockerSocket.enable = true;
     };
-    # docker.enable = true;
-    # libvirtd.enable = true;
   };
 
   # dconf
@@ -31,11 +33,7 @@
     asahi-btsync
     asahi-fwextract
     asahi-wifisync
-    chromium
-    firefox
     git
-    home-manager
-    neovim
     wget
   ];
 
@@ -115,5 +113,5 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }

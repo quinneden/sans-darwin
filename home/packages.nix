@@ -1,7 +1,5 @@
 { pkgs, inputs, ... }:
 let
-  mkIf = cond: value: if cond then value else [ ];
-
   screenshot = pkgs.writers.writeNuBin "screenshot" {
     makeWrapperArgs = with pkgs; [
       "--prefix PATH : ${
@@ -22,7 +20,7 @@ let
     name = "gjs";
     src = null;
     dontUnpack = true;
-    nativeBuildInputs = with pkgs; [ wrapGAppsHook3 ];
+    nativeBuildInputs = with pkgs; [ wrapGAppsHook4 ];
     buildInputs = with pkgs; [
       gjs
       glib
@@ -40,46 +38,59 @@ let
     '';
   };
 
-  python = pkgs.python3.withPackages (p: [ p.requests ]);
+  python-wrapped =
+    let
+      python = pkgs.python3.withPackages (p: [
+        p.requests
+        p.pygobject3
+      ]);
+    in
+    pkgs.stdenv.mkDerivation {
+      name = "python";
+      src = null;
+      dontUnpack = true;
+      nativeBuildInputs = with pkgs; [ wrapGAppsHook4 ];
+      buildInputs = with pkgs; [
+        python
+        glib
+        libsoup_3
+        gtk4
+        gtk3
+        gtk4-layer-shell
+        gtk-layer-shell
+        libadwaita
+        gobject-introspection
+      ];
+      installPhase = ''
+        mkdir -p $out/bin
+        cp ${python}/bin/python3 $out/bin/python
+      '';
+    };
 in
 {
-  home.packages = [
-    lorem
-  ]
-  ++ (with pkgs; [
+  home.packages = with pkgs; [
+    (mpv.override { scripts = [ mpvScripts.mpris ]; })
     bat
+    btop
+    esbuild
     eza
     fd
-    ripgrep
+    fragments
     fzf
+    gjs-wrapped
+    inputs.icon-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
+    inputs.nix-search.packages.${pkgs.stdenv.hostPlatform.system}.default
+    just
     lazydocker
     lazygit
-    btop
-  ])
-  ++ (mkIf pkgs.stdenv.isLinux (
-    with pkgs;
-    [
-      inputs.icon-browser.packages.${pkgs.stdenv.hostPlatform.system}.default
-      # inputs.nix-search.packages.${pkgs.stdenv.hostPlatform.system}.default
-      screenshot
-
-      (mpv.override { scripts = [ mpvScripts.mpris ]; })
-      # spotify
-      fragments
-      # yabridge
-      # yabridgectl
-      # wine-staging
-
-      esbuild
-      nodePackages.npm
-      # nodejs
-      pnpm
-      yarn
-      gjs-wrapped
-
-      python
-      uv
-      poetry
-    ]
-  ));
+    lorem
+    micro
+    nodejs
+    nodePackages.npm
+    pnpm
+    python-wrapped
+    ripgrep
+    screenshot
+    uv
+  ];
 }

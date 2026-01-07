@@ -62,7 +62,7 @@
       {
         settings = {
           "org/gnome/desktop/peripherals/touchpad" = {
-            tap-to-click = true;
+            tap-to-click = false;
           };
           "org/gnome/desktop/interface" = {
             cursor-theme = "phinger-cursors-dark";

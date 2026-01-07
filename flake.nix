@@ -3,17 +3,15 @@
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     ags = {
       url = "github:aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     astal = {
       url = "github:aylur/astal";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     battery-notifier = {
       url = "github:aylur/battery-notifier";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    firefox-gnome-theme = {
-      url = "github:rafaelmardojai/firefox-gnome-theme";
-      flake = false;
     };
     home-manager = {
       url = "github:nix-community/home-manager?ref=master";
@@ -33,10 +31,11 @@
     };
     marble = {
       url = "git+ssh://git@github.com/marble-shell/kit";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     marble-shell = {
-      url = "github:aylur/marble-shell";
-      inputs.sshKey.follows = "sshKey";
+      url = "git+ssh://git@github.com/quinneden/marble-shell";
+      inputs.nixpkgs.follows = "nixpkgs";
       inputs.marble.follows = "marble";
     };
     nix-search = {
@@ -45,41 +44,18 @@
     };
     nixos-apple-silicon = {
       url = "github:nix-community/nixos-apple-silicon";
-      # inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    sshKey = {
-      url = "git+ssh://git@github.com/quinneden/keys?dir=ssh/qe-mbp/id_ed25519";
-      flake = false;
-    };
-    # secrets = {
-    #   url = "git+ssh://git@github.com:quinneden/secrets";
-    #   inputs = { };
-    # };
   };
 
   outputs =
     { nixpkgs, self, ... }@inputs:
-
-    let
-      system = "aarch64-linux";
-
-      pkgs = import nixpkgs {
-        inherit system;
-        config.allowUnfree = true;
-        # overlays = [ self.overlays.default ];
-      };
-    in
-
     {
       nixosConfigurations = {
-        "nixos" = nixpkgs.lib.nixosSystem {
+        "blanche" = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs self; };
-          modules = [ ./system/nixos ];
+          modules = [ ./system/blanche ];
         };
       };
-
-      # overlays = import ./pkgs/overlay.nix { inherit inputs; };
-
-      packages.${system} = { inherit (pkgs) marble-shell; };
     };
 }
