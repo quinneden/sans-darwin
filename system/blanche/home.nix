@@ -4,10 +4,11 @@
     ../../home/browser.nix
     ../../home/dconf.nix
     ../../home/distrobox
+    ../../home/dms.nix
     ../../home/ghostty.nix
     ../../home/git.nix
-    ../../home/hyprland.nix
     ../../home/lf.nix
+    ../../home/niri.nix
     ../../home/packages.nix
     ../../home/sh.nix
     ../../home/starship.nix
