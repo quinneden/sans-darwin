@@ -27,7 +27,7 @@
 
     niri = {
       enableKeybinds = true;
-      enableSpawn = true;
+      enableSpawn = false;
     };
 
     session = {
@@ -39,6 +39,11 @@
       theme = "dark";
       dynamicTheming = true;
       # Add any other settings here
+    };
+
+    systemd = {
+      enable = true;
+      restartIfChanged = true;	
     };
   };
 }

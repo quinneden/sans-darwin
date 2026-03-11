@@ -82,7 +82,7 @@ in
           ${config.xdg.configHome}/zsh/completions
           ${config.xdg.configHome}/zsh/functions
           /nix/var/nix/profiles/default/share/zsh/site-functions(N)
-          /etc/profiles/per-user/${user}/share/zsh/site-functions
+          /etc/profiles/per-user/qeden/share/zsh/site-functions
         )
 
         ZCOMPLETIONS_DIGEST=$ZDOTDIR/completions/.digest.zwc

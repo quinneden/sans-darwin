@@ -55,7 +55,7 @@
 
   # network
   networking = {
-    hostName = "nixos-macmini";
+    hostName = "blanche-nixos";
     networkmanager = {
       enable = true;
       wifi.backend = "iwd";
@@ -84,7 +84,7 @@
   hardware.asahi = {
     setupAsahiSound = true;
     extractPeripheralFirmware = true;
-    peripheralFirmwareDirectory = "/etc/nixos/firmware";
+    peripheralFirmwareDirectory = "${./firmware}";
   };
 
   # bootloader
@@ -107,15 +107,20 @@
       "udev.log_priority=3"
     ];
 
-    kernelPatches = [
-      {
-        name = "macsmc-power.c support_charge_behavior";
-        patch = pkgs.fetchpatch2 {
-          url = "https://patch-diff.githubusercontent.com/raw/AsahiLinux/linux/pull/435.patch";
-          sha256 = "sha256-j3T1uaL4kEmmea9w+PKVp2kpjcPXAc1gy9LrEbCPhLU=";
-        };
-      }
-    ];
+    # kernelPatches = [
+      # {
+        # name = "macsmc-power.c support_charge_behavior";
+        # patch = pkgs.fetchpatch2 {
+          # url = "https://patch-diff.githubusercontent.com/raw/AsahiLinux/linux/pull/435.patch";
+          # sha256 = "";
+        # };
+      # }
+    # ];
+  };
+
+  xdg.portal = {
+  	enable = true;
+  	extraPortals = [pkgs.xdg-desktop-portal-gtk];
   };
 
   security.sudo.wheelNeedsPassword = false;

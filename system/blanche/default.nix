@@ -13,7 +13,6 @@
   ];
 
   gnome.enable = true;
-  hyprland.enable = true;
 
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
