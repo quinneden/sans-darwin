@@ -8,7 +8,7 @@
     ../../home/ghostty.nix
     ../../home/git.nix
     ../../home/lf.nix
-    ../../home/niri.nix
+    ../../home/hyprland.nix
     ../../home/packages.nix
     ../../home/sh.nix
     ../../home/starship.nix

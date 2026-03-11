@@ -20,6 +20,12 @@
   wayland.windowManager.hyprland = {
     enable = true;
     systemd.enable = true;
+	extraConfig = ''
+	  source = ~/.config/hypr/dms/colors.conf
+	  source = ~/.config/hypr/dms/layout.conf
+	  source = ~/.config/hypr/dms/outputs.conf
+	  source = ~/.config/hypr/dms/windowrules.conf
+	'';
 
     settings = {
       exec-once = [ "hyprctl setcursor phinger-cursors-dark 24" ];
@@ -41,6 +47,7 @@
         kb_layout = "us";
         follow_mouse = 1;
         touchpad = {
+          tap-to-click = false;
           natural_scroll = "yes";
           disable_while_typing = true;
           drag_lock = true;
@@ -64,7 +71,7 @@
         workspace_swipe_use_r = true;
       };
 
-      windowrulev2 = [ "float, class:(.*)" ];
+      # windowrulev2 = [ "float, class:(.*)" ];
 
       bind =
         let

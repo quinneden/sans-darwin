@@ -6,13 +6,14 @@
     inputs.home-manager.nixosModules.home-manager
     ./audio.nix
     ./hardware.nix
-    ./gnome.nix
+    ./hyprland.nix
+    # ./gnome.nix
     ./locale.nix
     ./nautilus.nix
     ./system.nix
   ];
 
-  gnome.enable = true;
+  # gnome.enable = false;
 
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
